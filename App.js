@@ -14,9 +14,8 @@ export default function App() {
   }
 
   function endAddGoalHandler() {
-    setModalIsVisible(false)
+    setModalIsVisible(false);
   }
-
 
   function addGoalHandler(enteredGoalText) {
     // console.log(enteredGoalText);
@@ -25,7 +24,7 @@ export default function App() {
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
 
-    endAddGoalHandler()
+    endAddGoalHandler();
   }
 
   const DeleteItemHandler = (id) => {
@@ -35,31 +34,38 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color={"#5e0acc"}
-        onPress={startAddGoalHandler}
-      />
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} onCancel={endAddGoalHandler}/>
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                id={itemData.item.id}
-                onDeleteItem={DeleteItemHandler}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-        ></FlatList>
+    <>
+    <StatusBar style="light"/>
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color={"#a065ec"}
+          onPress={startAddGoalHandler}
+        />
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          onCancel={endAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  id={itemData.item.id}
+                  onDeleteItem={DeleteItemHandler}
+                />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          ></FlatList>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
